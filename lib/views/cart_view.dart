@@ -105,7 +105,9 @@ class CartView extends StatelessWidget {
               itemCount: cart.cartItems.length,
               padding: const EdgeInsets.all(10),
               itemBuilder: (context, index) {
-                final item = cart.cartItems.values.toList()[index];
+                final entry = cart.cartItems.entries.toList()[index];
+                final cartDocId = entry.key; // ✅ Firestore document ID
+                final item = entry.value;
                 final product = item.product;
 
                 return Card(
@@ -121,7 +123,7 @@ class CartView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // 🖼️ Image + Info
+                        // 🖼️ Product Info Row
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -137,8 +139,7 @@ class CartView extends StatelessWidget {
                             const SizedBox(width: 12),
                             Expanded(
                               child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     product.name,
@@ -167,19 +168,15 @@ class CartView extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(height: 2),
-                                  Row(
-                                    children: const [
-                                      Text(
-                                        "Sold by ",
-                                        style: TextStyle(fontSize: 13),
-                                      ),
+                                  const Row(
+                                    children: [
+                                      Text("Sold by ", style: TextStyle(fontSize: 13)),
                                       Text(
                                         "D. R. GROUP",
                                         style: TextStyle(
                                           fontSize: 13,
                                           color: Colors.blue,
-                                          decoration:
-                                          TextDecoration.underline,
+                                          decoration: TextDecoration.underline,
                                         ),
                                       ),
                                     ],
@@ -199,19 +196,19 @@ class CartView extends StatelessWidget {
 
                         const SizedBox(height: 10),
 
-                        // ➕ Quantity + Buttons
+                        // ➕ Quantity Controls and Buttons
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
-                              // Quantity
+                              // 🔢 Quantity control
                               Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: Colors.yellow.shade700,
-                                      width: 1.5),
-                                  borderRadius:
-                                  BorderRadius.circular(40),
+                                    color: Colors.yellow.shade700,
+                                    width: 1.5,
+                                  ),
+                                  borderRadius: BorderRadius.circular(40),
                                 ),
                                 child: Row(
                                   children: [
@@ -221,12 +218,12 @@ class CartView extends StatelessWidget {
                                         color: Colors.black87,
                                       ),
                                       onPressed: () {
-                                        cart.decreaseQuantity(product.id);
+                                        cart.decreaseQuantity(cartDocId);
                                       },
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8),
+                                      padding:
+                                      const EdgeInsets.symmetric(horizontal: 8),
                                       child: Text(
                                         "${item.quantity}",
                                         style: const TextStyle(
@@ -241,25 +238,23 @@ class CartView extends StatelessWidget {
                                         color: Colors.black87,
                                       ),
                                       onPressed: () {
-                                        cart.increaseQuantity(product.id);
+                                        cart.increaseQuantity(cartDocId);
                                       },
                                     ),
                                   ],
                                 ),
                               ),
+
                               const SizedBox(width: 10),
 
-                              // Delete Button
+                              // 🗑️ Delete Button
                               OutlinedButton(
-                                onPressed: () =>
-                                    cart.removeFromCart(product.id),
+                                onPressed: () => cart.removeFromCart(cartDocId),
                                 style: OutlinedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(30),
+                                    borderRadius: BorderRadius.circular(30),
                                   ),
-                                  side: const BorderSide(
-                                      color: Colors.grey, width: 1),
+                                  side: const BorderSide(color: Colors.grey, width: 1),
                                 ),
                                 child: const Text(
                                   "Delete",
@@ -269,18 +264,17 @@ class CartView extends StatelessWidget {
                                   ),
                                 ),
                               ),
+
                               const SizedBox(width: 8),
 
-                              // Save for later
+                              // 💾 Save for Later Button
                               OutlinedButton(
                                 onPressed: () {},
                                 style: OutlinedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(30),
+                                    borderRadius: BorderRadius.circular(30),
                                   ),
-                                  side: const BorderSide(
-                                      color: Colors.grey, width: 1),
+                                  side: const BorderSide(color: Colors.grey, width: 1),
                                 ),
                                 child: const Text(
                                   "Save for later",
@@ -300,6 +294,7 @@ class CartView extends StatelessWidget {
               },
             ),
           ),
+
 
           // 💰 Sticky Footer
           Container(

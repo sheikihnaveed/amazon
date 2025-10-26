@@ -200,11 +200,11 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> increaseQuantity(String productId) async {
+  Future<void> increaseQuantity(String cartDocId) async {
     final user = _auth.currentUser;
-    if (!_cartItems.containsKey(productId)) return;
+    if (!_cartItems.containsKey(cartDocId)) return;
 
-    final current = _cartItems[productId]!;
+    final current = _cartItems[cartDocId]!;
     final newQty = current.quantity + 1;
     current.quantity = newQty;
     notifyListeners();
@@ -212,26 +212,24 @@ class CartProvider extends ChangeNotifier {
     if (user == null) return;
 
     try {
-      final cartRef = _db.collection('users').doc(user.uid).collection('cart');
-      final existing = await cartRef
-          .where('productId', isEqualTo: productId)
-          .limit(1)
-          .get();
-      if (existing.docs.isNotEmpty) {
-        await cartRef.doc(existing.docs.first.id).update({'quantity': newQty});
-      }
+      final docRef = _db
+          .collection('users')
+          .doc(user.uid)
+          .collection('cart')
+          .doc(cartDocId);
+      await docRef.update({'quantity': newQty});
     } catch (e) {
       debugPrint('increaseQuantity error: $e');
     }
   }
 
-  Future<void> decreaseQuantity(String productId) async {
+  Future<void> decreaseQuantity(String cartDocId) async {
     final user = _auth.currentUser;
-    if (!_cartItems.containsKey(productId)) return;
+    if (!_cartItems.containsKey(cartDocId)) return;
 
-    final current = _cartItems[productId]!;
+    final current = _cartItems[cartDocId]!;
     if (current.quantity <= 1) {
-      await removeFromCart(productId);
+      await removeFromCart(cartDocId);
       return;
     }
 
@@ -242,18 +240,17 @@ class CartProvider extends ChangeNotifier {
     if (user == null) return;
 
     try {
-      final cartRef = _db.collection('users').doc(user.uid).collection('cart');
-      final existing = await cartRef
-          .where('productId', isEqualTo: productId)
-          .limit(1)
-          .get();
-      if (existing.docs.isNotEmpty) {
-        await cartRef.doc(existing.docs.first.id).update({'quantity': newQty});
-      }
+      final docRef = _db
+          .collection('users')
+          .doc(user.uid)
+          .collection('cart')
+          .doc(cartDocId);
+      await docRef.update({'quantity': newQty});
     } catch (e) {
       debugPrint('decreaseQuantity error: $e');
     }
   }
+
 
   Future<void> clearCart() async {
     final user = _auth.currentUser;
