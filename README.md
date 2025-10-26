@@ -1,16 +1,29 @@
-# amazon
+# 🛍️ Amazon Flutter E-Commerce App
 
-A new Flutter project.
+A full-featured **Amazon-style Flutter E-Commerce App** built with **Firebase** for backend services and deployed to **GitHub Pages** for web.  
+This project supports **Android**, **iOS**, and **Web** — all from a single Flutter codebase.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Live Demo
+Live Web Version (GitHub Pages): https://sheikihnaveed.github.io/amazon-web/
 
-A few resources to get you started if this is your first Flutter project:
+GitHub Repository: https://github.com/sheikihnaveed/amazon
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Video Demo: https://drive.google.com/file/d/1_Gug1G4lys_6aoh19zB1sdks-almlgRF/view?usp=sharing
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 🧠 Overview
+
+This app mimics key features of an e-commerce platform like **Amazon**, including:
+
+- 🔐 Firebase Authentication with Login Register and Verify mail (check Spam for email Verification).
+- 🏠 Home screen with dynamic product listings  
+- 🧭 Category-based product browsing  
+- 🛒 Cart with quantity controls  
+- 💳 Checkout summary  
+- 👤 Profile page with Sign Out  
+- 🌐 Web support (deployed on GitHub Pages)  
+
+---
