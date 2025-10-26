@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "992891783537",
+    "project_id": "amazonclone-sheikhnaveed",
+    "storage_bucket": "amazonclone-sheikhnaveed.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992891783537:android:a1eab9ae43b4464ea1ced0",
+        "android_client_info": {
+          "package_name": "com.example.amazon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992891783537-e2qma8d9fjkjpaf6sj37g0m6gp7tcaco.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.amazon",
+            "certificate_hash": "b87f03adb150cb6f276d65ff88220496540d6305"
+          }
+        },
+        {
+          "client_id": "992891783537-34p2sgdcojabk3i4bbhti06iqm28gdi8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsY1z_41fWGsepZS43z8WCy7CMU2BUFj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992891783537-34p2sgdcojabk3i4bbhti06iqm28gdi8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "992891783537-it8b3r88r8q9oa6egtfsumf7gcb52gnr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.amazon"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
